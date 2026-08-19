@@ -16,6 +16,28 @@ let estudiantes: Estudiante[] = [];
 
 /*CRUD*/
 //---endpoints--/7
+//obtener un estudiante especifico por su id
+interface idParam {
+  id:string;
+}
+
+app.get("/api/estudiantes/:id", (req: Request, res: Response) => {
+  const idBuscado = Number(req.params.id);
+  if(isNaN(idBuscado)){
+    return res.status(400)
+    .json({error: "debe escribir un número válido"});
+
+  }
+  const estudianteFiltrado = estudiantes.find(
+    (e) => e.id === idBuscado,
+  );
+  if(!estudianteFiltrado){
+    return res.status(404)
+    .json({error: "no esxiste un estudiante con ese id"});
+
+  }
+  res.status(200).json(estudianteFiltrado);
+});
 
 //obtener los estudiantes
 
@@ -43,7 +65,7 @@ app.post("/api/estudiantes",(req:Request, res:Response) =>{
 });
 
 //Actualizar estudiante
-app.put("/api/estudiantes",(req:Request, res:Response)=>{
+app.put("/api/estudiantes/:id",(req:Request, res:Response)=>{
   const idBuscado = Number(req.params.id);
   const index = estudiantes.findIndex((estudiante)=>{
     return estudiante.id === idBuscado;
