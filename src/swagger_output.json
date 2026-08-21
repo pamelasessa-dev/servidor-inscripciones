@@ -5,7 +5,7 @@
     "description": "Documentación de la API REST del MP-S2",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "n1z6p03m-3000.brs.devtunnels.ms",
   "basePath": "/",
   "schemes": [
     "http"
